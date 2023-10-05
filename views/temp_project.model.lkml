@@ -8,6 +8,7 @@ datagroup: temp_project_default_datagroup {
 persist_with: temp_project_default_datagroup
 
 include: "*.view.lkml"
+include: "*.dashboard"
 
 # Tip:h  Give Explores a meaningful name related to the use case they serve.
 # Consider that Explore names appear in URLs, and try to help future developers with a descriptive name.
