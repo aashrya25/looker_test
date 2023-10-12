@@ -1,5 +1,5 @@
-- dashboard: dashboard1
-  title: Dashboard1
+- dashboard: d2
+  title: Dashboard2
   layout: newspaper
   preferred_viewer: dashboards-next
   crossfilter_enabled: true
