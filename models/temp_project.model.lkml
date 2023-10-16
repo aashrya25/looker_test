@@ -6,4 +6,3 @@ datagroup: temp_project_default_datagroup {
 }
 
 persist_with: temp_project_default_datagroup
-
