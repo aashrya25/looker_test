@@ -1,5 +1,5 @@
 - dashboard: d2
-  title: Dashboard2
+  title: Dashboard22
   layout: newspaper
   preferred_viewer: dashboards-next
   crossfilter_enabled: true
