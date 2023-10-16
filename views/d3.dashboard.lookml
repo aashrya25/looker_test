@@ -1,5 +1,5 @@
 - dashboard: d3
-  title: Dashboard33
+  title: Dashboard333
   layout: newspaper
   preferred_viewer: dashboards-next
   crossfilter_enabled: true
