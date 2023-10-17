@@ -1,17 +1,4 @@
-# ### Intermediate users view file
-# This view demonstrates using a SQL Derived Table as the source.
-# This view also demonstrates a special field type that supports beautiful map charts out of the box (type:location (lat & long) )
-#
-# In Our Business Scenario, the business users requested that we add 'First Order Date' as a user level characteristic
-#
-# NOTE: To demonstrate an optional stylistic choice, declarations which are redundant with defaults have been removed. For example, the the `type:string` subparameter of the `dimension` parameter.
-# Some find this minimalist LookML style more readable, others disagree and prefer more explicit declarations.
-###
-
-access_grant: can_view_user_email {
-  user_attribute: user_email_access
-  allowed_values: [ "yes" ]
-}
+include: "*.lkml"
 
 view: intermediate_users {
 
@@ -55,7 +42,6 @@ view: intermediate_users {
   dimension: last_name {}
 
   dimension: email {
-    required_access_grants: [can_view_user_email]
   }
 
   dimension: age {
@@ -130,7 +116,7 @@ view: intermediate_users {
   measure: count {
     label: "# of Users"
     type: count
-    # drill_fields: [state, count]
+    drill_fields: [state, count]
   }
 
 }

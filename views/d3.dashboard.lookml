@@ -1,94 +1,11 @@
-- dashboard: demo_dashboard
-  title: Demo Dashboard3 Dev
+- dashboard: d3
+  title: Dashboard333
   layout: newspaper
   preferred_viewer: dashboards-next
   crossfilter_enabled: true
   description: ''
   preferred_slug: 2X51PqYhGv7c918wiQ5l99
   elements:
-  - title: Country and Number of users
-    name: Country and Number of users
-    model: intermediate_ecomm
-    explore: intermediate_example_ecommerce
-    type: looker_grid
-    fields: [users.country, users.count]
-    sorts: [users.count desc]
-    limit: 70
-    column_limit: 50
-    show_view_names: false
-    show_row_numbers: false
-    transpose: false
-    truncate_text: false
-    hide_totals: false
-    hide_row_totals: false
-    size_to_fit: true
-    table_theme: white
-    limit_displayed_rows: false
-    enable_conditional_formatting: true
-    header_text_alignment: center
-    header_font_size: '14'
-    rows_font_size: '12'
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    color_application:
-      collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2
-      palette_id: 5d189dfc-4f46-46f3-822b-bfb0b61777b1
-    show_sql_query_menu_options: false
-    column_order: ["$$$_row_numbers_$$$", products.brand, products.category]
-    show_totals: true
-    show_row_totals: true
-    truncate_header: false
-    minimum_column_width: 75
-    series_labels:
-      users.count: Number of users
-    series_column_widths:
-      users.country: 228
-      users.count: 266
-    header_font_color: "#fff9f9"
-    header_background_color: "#25435A"
-    conditional_formatting: [{type: greater than, value: 1500, background_color: !!null '',
-        font_color: "#30b229", color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
-          palette_id: 4a00499b-c0fe-4b15-a304-4083c07ff4c4}, bold: false, italic: false,
-        strikethrough: false, fields: [users.count]}, {type: less than, value: 1500,
-        background_color: !!null '', font_color: "#EA4335", color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
-          palette_id: 4a00499b-c0fe-4b15-a304-4083c07ff4c4}, bold: false, italic: false,
-        strikethrough: false, fields: [users.count]}, {type: along a scale..., value: !!null '',
-        background_color: !!null '', font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
-          palette_id: 4a00499b-c0fe-4b15-a304-4083c07ff4c4}, bold: false, italic: false,
-        strikethrough: false, fields: !!null ''}]
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    trellis: ''
-    stacking: ''
-    legend_position: center
-    point_style: none
-    show_value_labels: false
-    label_density: 25
-    x_axis_scale: auto
-    y_axis_combined: true
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    defaults_version: 1
-    hidden_pivots: {}
-    title_hidden: true
-    listen: {}
-    row: 3
-    col: 0
-    width: 10
-    height: 8
   - title: Country [user count > 1500]
     name: Country [user count > 1500]
     model: temp_project
