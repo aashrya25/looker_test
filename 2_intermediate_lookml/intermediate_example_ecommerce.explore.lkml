@@ -4,16 +4,28 @@
 #   - Limiting/removing fields from the Explore when fields are in the source table but are not relevant
 ###
 
+access_grant: can_view_Intermediate_Ecommerce_explore {
+  user_attribute: intermediate_ecommerce_explore_access
+  allowed_values: [ "yes" ]
+}
+
 include: "/2_intermediate_lookml/*.view.lkml"
 
-# Tip: Give Explores a meaningful name related to the use case they serve.
+# Tip:h  Give Explores a meaningful name related to the use case they serve.
 # Consider that Explore names appear in URLs, and try to help future developers with a descriptive name.
 explore: intermediate_example_ecommerce {
+  required_access_grants: [can_view_Intermediate_Ecommerce_explore]
   # Use the `from` parameter to specify what view object to use as the base view,
   # if the view name is different from the Explore name.
   from: intermediate_order_items
   view_name: order_items # Optionally use `view_name` to change how you reference the view in this Explore.
   label: "2) Intermediate Ecommerce" # Change the label used for the Explore in the UI, i.e. the human readable name
+
+  access_filter:{
+    field: users.country
+    user_attribute: country_rls
+  }
+
   join: users { # Technically, join name sets an alias: how the view joined view will be referred to in this Explore, For example, this aliasing is used when you need two joins to the same view (for example, imagine we have one users table which we want to join twice, for buyer and seller).
     from: intermediate_users #If the join/alias does not match the LookML view name, set the LookML view to use with this from parameter.
     type: left_outer

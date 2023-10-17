@@ -1,13 +1,4 @@
-### Intermediate order items view file
-# This view is meant to:
-#   - Highlight common types of field-level development/enhancements/customizations that a LookML developer will implement to meet specific user needs
-#   - Introduce the LookML set object (a named set of fields)
-#   - Introduce basic drill_fields options
-#
-# NOTE: To demonstrate an optional stylistic choice, declarations which are redundant with defaults have been removed. For example, the the `type:string` subparameter of the `dimension` parameter.
-###
-
-include: "/2_intermediate_lookml/custom_named_value_formats.lkml" # In this scenario, business users requested a short number format, which is defined in this file.
+include: "*.lkml"
 
 view: intermediate_order_items {
   sql_table_name: `bigquery-public-data.thelook_ecommerce.order_items` ;;
@@ -62,14 +53,10 @@ view: intermediate_order_items {
     timeframes: [raw,time,date,week,month,quarter,year]
   }
 
-  # dimension: date_formatted {
-  #   sql: ${created_at_date} ;;
-  #   html:{{ rendered_value | date: "%m-%d-%Y" }};;
-
-  # dimension: created_at1 {
-  #   type: string
-  #   sql: FORMAT_DATE('%x', ${created_at_date}) ;;
-  # }
+  dimension: created_at1 {
+    type: string
+    sql: FORMAT_DATE('%x', ${created_at_date}) ;;
+  }
 
   dimension_group: shipped_at {
     group_label: "Other Dates"
@@ -117,7 +104,7 @@ view: intermediate_order_items {
       when: {sql:${status} in ('Cancelled','Returned');; label:"Invalid"}
       when: {sql:${status} in ('Shipped','Complete','Processing');; label:"Valid"}
       else: "Unknown"
-      }
+    }
   }
 
   dimension: status_in_order {
