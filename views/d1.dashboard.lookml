@@ -1,6 +1,6 @@
 ##jai
 - dashboard: d1
-  title: Dashboard1
+  title: Dashboard11
   layout: newspaper
   preferred_viewer: dashboards-next
   crossfilter_enabled: true
