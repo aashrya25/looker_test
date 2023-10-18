@@ -1,4 +1,4 @@
-? edit from sample_thelook_ecommerce 3
+? edit from sample_thelook_ecommerce 4
 <span style="background-color:aliceblue">
 **You Are Here**: You are reading the README that explains foundational concepts about models and Explores. It is intended to be viewed alongside the [basic_ecomm.model file](/projects/sample_thelook_ecommerce/files/1_basic_lookml/basic_ecomm.model.lkml).
 <br><br>For an overview of the whole sample project, head back to [START_HERE_README](/projects/sample_thelook_ecommerce/files/0_start_here/START_HERE_README.md).
