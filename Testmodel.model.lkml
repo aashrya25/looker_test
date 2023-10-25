@@ -11,3 +11,4 @@ include: "/views/stg_ce1_yph1.view.lkml" # The * wildcard was used here to inclu
 # # We have a table of transactional order_items sales records including a user_id, and a table of user information.
 # # Our analysts want to create queries and visualizations about sales, including info about the user who created the order.
 ####
+explore: test {view_name:stg_ce1_yph1}
