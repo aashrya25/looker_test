@@ -70,7 +70,7 @@ view: stg_ce1_yph1 {
     sql: ${TABLE}.EINFR ;;
   }
   measure: erlos {
-    type: number
+    type: sum
     sql: ${TABLE}.ERLOS ;;
   }
   dimension: etl_cret_by {
