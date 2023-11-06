@@ -22,6 +22,12 @@ include: "/1_basic_lookml/*.view.lkml" # The * wildcard was used here to include
 
 explore: basic_order_items {
   label: "1) Basic Ecommerce" # Set the Explore's UI label to clarify it and distinguish it from our other Explores.
+
+  access_filter: {
+    field: basic_users.country
+    user_attribute: country_rls
+  }
+
   join: basic_users { # Bring in user data for the user who created the order item
     type: left_outer # A standard SQL left join will be used (the method keeps all records, even if no joinable user data is found)
     relationship: many_to_one # The "left side" table (the table we're joining from, the basic_order_items table) can have many records for one record in the "right side" table (the basic_users table)
