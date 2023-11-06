@@ -1,59 +1,70 @@
+? edit from sample_thelook_ecommerce 5
 <span style="background-color:aliceblue">
-**You Are Here**: You are reading the README that explains BASIC LookML concepts and the examples in the folder 1_basic_lookml.
-For an overview of the whole sample project, head back to [START_HERE_README](/projects/sample_thelook_ecommerce/files/0_start_here/START_HERE_README.md).
+**You Are Here**: You are reading the README that explains foundational concepts about models and Explores. It is intended to be viewed alongside the [basic_ecomm.model file](/projects/sample_thelook_ecommerce/files/1_basic_lookml/basic_ecomm.model.lkml).
+<br><br>For an overview of the whole sample project, head back to [START_HERE_README](/projects/sample_thelook_ecommerce/files/0_start_here/START_HERE_README.md).
 </span>
 
-This **Basic** section (1_basic_lookml folder) focuses on the most foundational concepts in LookML and is not far removed from the typical auto-generated code you will start with when setting up your own data source.
+<h1><span style="color:#2d7eea">Model File Guide</span></h1>
 
-First, let's take a moment to get oriented to the environment and talk about the broader context.
+This document explains the basics of a **model file** and will walk you through the [basic_ecomm.model file](/projects/sample_thelook_ecommerce/files/1_basic_lookml/basic_ecomm.model.lkml).
+It is a good idea to open this README and the model file (linked above) in separate tabs.
 
-<h2><span style="color:#2d7eea">The End User Experience You Are Building: Exploring Data</span></h2>
+<h2><span style="color:#2d7eea">What Is a Model File?</span></h2>
+A **model file** in Looker lets a developer create environments for non-technical users to query the tables in your database. We call these environments **Explores** ... more on that later.
 
-Ad hoc data discovery is one of Looker’s most powerful and unique features. Looker enables analysts to freely explore data and build dashboards, within governed datasets that you set up.
+Let's break down the first few lines of the [basic_ecomm.model file](/projects/sample_thelook_ecommerce/files/1_basic_lookml/basic_ecomm.model.lkml) in the following screenshot:
 
-You can try the **Explore** that is defined in the basic section here: [Direct Link to Basic Explore](/explore/basic_ecomm/basic_order_items?fields=basic_order_items.created_at_date,basic_order_items.count&fill_fields=basic_order_items.created_at_date&sorts=basic_order_items.created_at_date+desc&limit=500&column_limit=50&vis=%7B%22x_axis_gridlines%22%3Afalse%2C%22y_axis_gridlines%22%3Atrue%2C%22show_view_names%22%3Afalse%2C%22show_y_axis_labels%22%3Atrue%2C%22show_y_axis_ticks%22%3Atrue%2C%22y_axis_tick_density%22%3A%22default%22%2C%22y_axis_tick_density_custom%22%3A5%2C%22show_x_axis_label%22%3Atrue%2C%22show_x_axis_ticks%22%3Atrue%2C%22y_axis_scale_mode%22%3A%22linear%22%2C%22x_axis_reversed%22%3Afalse%2C%22y_axis_reversed%22%3Afalse%2C%22plot_size_by_field%22%3Afalse%2C%22trellis%22%3A%22%22%2C%22stacking%22%3A%22%22%2C%22limit_displayed_rows%22%3Afalse%2C%22legend_position%22%3A%22center%22%2C%22point_style%22%3A%22none%22%2C%22show_value_labels%22%3Afalse%2C%22label_density%22%3A25%2C%22x_axis_scale%22%3A%22auto%22%2C%22y_axis_combined%22%3Atrue%2C%22show_null_points%22%3Atrue%2C%22interpolation%22%3A%22linear%22%2C%22series_types%22%3A%7B%7D%2C%22type%22%3A%22looker_line%22%2C%22defaults_version%22%3A1%7D&filter_config=%7B%7D&origin=share-expanded)
+![First half of Model File](https://i.imgur.com/jx9D9Uv.png)
 
-<h2><span style="color:#2d7eea">Benefits of Looker and LookML</span></h2>
-**Looker and LookML Empower End Users**
-LookML condenses and encapsulates the complexity of SQL. It lets analysts get the knowledge about what their data means "out of their heads" so that others can use it. This enables non-technical users to do their jobs -- building dashboards, drilling to row-level detail, and accessing complex metrics -- without having to worry about what’s behind the curtain.
+1.  `# For a detailed ...`: In LookML, code to the right of a # is code comments (not functional LookML code). Use comments to provide clarity to others reading the code.
+2.  `connection:` [(official doc)](https://cloud.google.com/looker/docs/reference/param-model-connection)
+    - Specifies which database we are using (these are configured in [the admin->connections page](/admin/next/connections) ahead of time).
+3.  `label:` [(official doc)](https://cloud.google.com/looker/docs/reference/param-model-label)
+    - Optional - Used to change how business users see the title of the drop-down menu created by this file.
+4.  `include:` [(official doc)](https://cloud.google.com/looker/docs/reference/param-model-include)
+    - Specifies the other LookML files you may use in this model file (most commonly view files).
+    - Think of this like a dependency.
+    - You can see what files are included by hovering your mouse over the ⓘ icon.
 
-**Looker and LookML Allow for Data Governance**
-By defining business metrics in LookML, you can ensure that Looker is always a credible single source of truth.
+The next thing we see in our model file is an Explore object. Let's talk about that!
 
-**Looker and LookML Are All About Reusability**
-Most data analysis requires the same work to be done over and over again. You extract raw data, prepare it, and deliver an analysis. With LookML, once you define a dimension or a measure the first time, you can continue to build on it, rather than having to rewrite it again and again.
+<h2><span style="color:#2d7eea">What Is an Explore?</span></h2>
 
-<h2><span style="color:#2d7eea">LookML Object Hierarchy</span></h2>
-You will encounter several different types of logical objects as shown in the following image.
-![Parts of a Project](https://cloud.google.com/static/looker/docs/images/lookml_object_hierarchy.png "Parts of a Project")
+- A model file can contain one or multiple Explores.
+- Each Explore is an environment that allows a user to choose different combinations of fields and filters to answer data questions without technical details and SQL.
+- Each Explore is made up of one or more joined views ([see example view and fuller description](/projects/sample_thelook_ecommerce/files/1_basic_lookml/basic_order_items.view.lkml)), which define a table of source data and its fields.
 
-In this **Basic** section (1_basic_lookml), we focus on models, Explores, joins, and views: We have an **Explore** (basic_ecomm) that **joins** two **views** (basic_order_items and basic_users).
+1.  `explore:` [(official doc)](https://cloud.google.com/looker/docs/reference/param-explore-explore)
+    - Creates an Explore enviromment for business users to query from.
+    - Our Explore is based on the `order_items` view file, so that table will be in the FROM clause of any query generated by this Explore.
+2.  `label:` [(official doc)](https://cloud.google.com/looker/docs/reference/param-explore-label)
+    - Optional - Used to change how business users see the title of this Explore in the front end.
+3.  `join:`[(official doc)](https://cloud.google.com/looker/docs/reference/param-explore-join)
+    - Optional - Establishes a join to a specified view file.
+    - Our join is to the `users` view file.
+4.  `type:`[(official doc)](https://cloud.google.com/looker/docs/reference/param-explore-join-type)
+    - Allows us to specify the type of SQL join we want to do (left, inner, outer, cross).
+5.  `relationship:`[(official doc)](https://cloud.google.com/looker/docs/reference/param-explore-join-relationship)
+    - Establishes the cardinality of the join (one to one, many to one, one to many, many to many).
+    - Looker uses this with advanced distinctness checks to ensure metrics don't become inaccurate during a fanout problem. [More info on that here](https://cloud.google.com/looker/docs/best-practices/understanding-symmetric-aggregates)
+    - Expresses the relationship from the Explore’s base view to the joining view.
+    - For our example, we know there are many order items to a single user, so the relationship is many to one.
+6.  `sql_on:`[(official doc)](https://cloud.google.com/looker/docs/reference/param-explore-join-sql-on)
+    - Allows us to etablish the keys (or columns) on which to join the tables.
+    - For our example, we join the `order_items.user_id` field to the `users.id` field.
+    - We can write raw SQL here if we like, but we can also use subsitution operators using the looker ${} notation. [More on Looker substitution operators](https://cloud.google.com/looker/docs/sql-and-referring-to-lookml#substitution_operator_)
 
-Learn about these objects by following steps in **What's Next**.
+Here's an entity-relational diagram (ERD) of the code defined in the model file.
+![basic_ecomm.model LookML Diagram](https://cloud.google.com/looker/docs/images/sample_lookml_basic_erd.png)
 
 ---
 
 <h1><span style="color:#2d7eea">What's Next</span></h1>
 
-Suggested Next Steps:
+1.  If you haven’t already, try out the `basic_order_items` **Explore** that we’ve defined above. You can get there from this model file by clicking the ▼ symbol next to the filename in the header of the editor panel. You should also check out the three sample dashboards included in the Shared folder.
 
-1. **Go to the [Business Pulse - Basic](/dashboards/1) Dashboard** built using queries on that Explore.
+2.  Begin to look at the field-level LookML that is used by this Explore, which can be found in the `basic_order_items` and `basic_user` view files within this project.
 
-2. **Go to the [Basic Ecommerce](/explore/basic_ecomm/basic_order_items) Explore** -- the query building and ad hoc analysis environment. You can also use an existing dashboard tile as a starting point (use **Explore from here** on the tile menu).
-
-3. **Go to the LookML files in the 1_basic_lookml folder**.
-
-- The model file where the Explore is defined -- Open [basic_ecomm.model](/projects/sample_thelook_ecommerce/files/1_basic_lookml/basic_ecomm.model.lkml) alongside [Model Companion README](/projects/sample_thelook_ecommerce/files/1_basic_lookml/BASIC_MODEL_COMPANION_README.md). You can open multiple editor windows in different browser tabs.
-- An example view file -- Open [basic_order_items.view](/projects/sample_thelook_ecommerce/files/1_basic_lookml/basic_order_items.view.lkml) (.model file) alongside [Model Companion README](/projects/sample_thelook_ecommerce/files/1_basic_lookml/BASIC_VIEW_COMPANION_README.md).
-
-After you've reviewed this 1_basic_lookml section, you can learn more advanced capabilities and techniques in the intermediate section, by **going to [INTERMEDIATE LOOKML README](/projects/sample_thelook_ecommerce/files/2_intermediate_lookml/INTERMEDIATE_LOOKML_README.md)**.
-
----
-
-<h1><span style="color:#2d7eea">Additional Resources</span></h1>
-
-To learn more about LookML and how to develop, visit:
-
-- [Looker User Guide](https://looker.com/guide)
-- [Looker Help Center](https://help.looker.com)
-- [Google Cloud Skills Boost](https://www.cloudskillsboost.google/course_templates/327)
+- You can navigate to the files in the File Browser at left.
+- Also, you can jump directly to a definition by holding the Option key (Mac) or Alt key (Windows) when clicking a purple LookML reference. For example: try Option/Alt clicking either of the two field references in the `sql_on` parameter above.
+- From the Explore (#1), you can navigate to an individual field’s LookML from the ⓘ icon next to the field in the Explore’s field list.
